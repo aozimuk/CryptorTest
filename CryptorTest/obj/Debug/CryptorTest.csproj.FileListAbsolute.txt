@@ -1,1 +1,2 @@
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\CryptorTest\bin\Debug\CryptorTest.exe.config
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\bin\Debug\CryptorTest.exe.config

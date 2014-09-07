@@ -1,0 +1,5 @@
+C:\Users\ASUS\Documents\Visual Studio 2005\Projects\des\des\bin\Debug\des.exe
+C:\Users\ASUS\Documents\Visual Studio 2005\Projects\des\des\bin\Debug\des.pdb
+C:\Users\ASUS\Documents\Visual Studio 2005\Projects\des\des\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2005\Projects\des\des\obj\Debug\des.exe
+C:\Users\ASUS\Documents\Visual Studio 2005\Projects\des\des\obj\Debug\des.pdb

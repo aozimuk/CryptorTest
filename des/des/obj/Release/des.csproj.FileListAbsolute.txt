@@ -1,0 +1,9 @@
+D:\Projects\des\des\bin\Release\des.exe
+D:\Projects\des\des\bin\Release\des.pdb
+D:\Projects\des\des\obj\Release\ResolveAssemblyReference.cache
+D:\Projects\des\des\obj\Release\des.exe
+D:\Projects\des\des\obj\Release\des.pdb
+C:\Users\valera\Downloads\Програм_шифрование_файлов_методом_DES_исходники\Програм шифрование файлов методом DES+исходники\ishodniki_des\des\des\obj\Release\des.exe
+C:\Users\valera\Downloads\Програм_шифрование_файлов_методом_DES_исходники\Програм шифрование файлов методом DES+исходники\ishodniki_des\des\des\obj\Release\des.pdb
+C:\Users\valera\Downloads\diplom_steganography\Програм_шифрование_файлов_методом_DES_исходники\Програм шифрование файлов методом DES+исходники\ishodniki_des\des\des\obj\Release\des.exe
+C:\Users\valera\Downloads\diplom_steganography\Програм_шифрование_файлов_методом_DES_исходники\Програм шифрование файлов методом DES+исходники\ishodniki_des\des\des\obj\Release\des.pdb
