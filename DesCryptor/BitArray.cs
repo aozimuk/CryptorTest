@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DesCryptor
 {
-    public class BitArray
+    public class BitArray: ICloneable
     {
         /// <summary>
         /// Массив бит
@@ -23,12 +23,13 @@ namespace DesCryptor
         }
 
         /// <summary>
-        /// Формирует массив 64 бит из указанного числа long
+        /// Формирует массив бит
+        /// <para>length не больше 64</para>
         /// </summary>
-        /// <param name="number">64-битовое число</param>
-        public BitArray(long number)
+        /// <param name="number">число</param>
+        /// <param name="length">количество бит</param>
+        public BitArray(int length, long number)
         {
-            int length = sizeof(long);
             bits = new bool[length];
             for (int i = 0; i < length; i++)
             {
@@ -51,6 +52,18 @@ namespace DesCryptor
                 }
             }
         }
+
+        public BitArray(BitArray bitArr)
+        {
+            this.bits = new bool[bitArr.bits.Length];
+            Array.Copy(bitArr.bits, 0, this.bits, 0, bitArr.bits.Length);
+        }
+
+        public BitArray(bool[] bitArr)
+        {
+            Array.Copy(bitArr, 0, this.bits, 0, bitArr.Length);
+        }
+
 
         /// <summary>
         /// Получение / установка бита на указанной позиции
@@ -86,6 +99,48 @@ namespace DesCryptor
             for (int i = 0; i < len; i++)
             {
                 res[i] = (this[i] == bArr[i]) ? false : true;
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Объединяет исходный массив бит с переданным, 
+        /// </summary>
+        /// <param name="right">Массив бит присоединяемы справа (старшие биты)</param>
+        public BitArray Concatenate(BitArray right)
+        {
+            BitArray res = new BitArray(this.Length + right.Length);
+
+            Array.Copy(this.bits, 0, res.bits, 0, this.Length);
+            Array.Copy(right.bits, 0, res.bits, this.Length, res.Length);
+
+            return res;
+        }
+
+        /// <summary>
+        /// Циклический cдвиг влево
+        /// </summary>
+        /// <param name="count">Количество бит на которое производится сдвиг</param>
+        public BitArray RotateLeftShift(int count)
+        {
+            bool tmp;
+            BitArray res = (BitArray)this.Clone();
+
+            // цикл по количеству сдвигов
+            for (int i = 0; i < count; i++)
+            {
+                // запоминаем старший бит
+                tmp = this.bits[bits.Length - 1];
+
+               // выполняем сдвиг
+                for (int ii = bits.Length - 1; ii > 0; ii--)
+                {
+                    res[ii] = res[ii - 1];
+                }
+                
+                // на место младшего приходит старший бит
+                res[0] = tmp;
             }
 
             return res;
@@ -128,16 +183,42 @@ namespace DesCryptor
         }
 
 
-
+        /// <summary>
+        /// Возравщает младшую половину бит
+        /// </summary>
         public BitArray GetLowHalf()
         {
             return this.GetLeftHalf();
         }
 
+        /// <summary>
+        /// Возравщает старшую половину бит
+        /// </summary>
         public BitArray GetHighHalf()
         {
             return this.GetRightHalf();
         }
 
+
+        /// <summary>
+        /// Преобразует массив бит к Int32
+        /// </summary>
+        public int ToInt32()
+        {
+            int res = 0;
+            int len = Math.Min(32,bits.Length);
+
+            for (int i = 0; i < len; i++)
+            {
+                res = (res << 1) | (bits[i] ? 1 : 0);
+            }
+
+            return res;
+        }
+
+        public object Clone()
+        {
+            return new BitArray(this);
+        }
     }
 }
