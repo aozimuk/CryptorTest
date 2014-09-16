@@ -3,3 +3,8 @@ C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\DesCryptor\bin
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\DesCryptor\bin\Debug\DesCryptor.pdb
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\DesCryptor\obj\Debug\DesCryptor.dll
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\DesCryptor\obj\Debug\DesCryptor.pdb
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\DesCryptor\bin\Debug\DesCryptor.dll
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\DesCryptor\bin\Debug\DesCryptor.pdb
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\DesCryptor\obj\Debug\DesCryptor.csprojResolveAssemblyReference.cache
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\DesCryptor\obj\Debug\DesCryptor.dll
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\DesCryptor\obj\Debug\DesCryptor.pdb
