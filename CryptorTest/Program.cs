@@ -67,22 +67,76 @@ namespace CryprtorTest
             
             */
 
+            /*
+            
+            //BitArray src = new BitArray(64, 123456789012);
+            //BitArray key = new BitArray(64, 169992929929);
 
 
-            BitArray src = new BitArray(64, 123456789012);
-            BitArray key = new BitArray(64, 169992929929);
-
-            Cryptor cr = new Cryptor();
+            byte[] key = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
 
-            BitArray srcCrypted = cr.Encrypting(src, key);
-            BitArray srcDeCrypted = cr.Decrypting(srcCrypted, key);
+            byte[] p = new BitArray(key).ToByteArray();
+            
+
+            byte[] arrSrc = new byte[] { 11, 12, 13, 14, 15, 16, 17, 18 };
 
 
-            Console.WriteLine("do:          " + src);
-            Console.WriteLine("vo vremya:   " + srcCrypted);
-            Console.WriteLine("posle:       " + srcDeCrypted);
+            byte[] arrCr = Cryptor.Encrypting(arrSrc, key);
 
+            byte[] arrDst = Cryptor.Decrypting(arrCr, key);
+
+
+             
+            //Console.WriteLine("do:          " + src);
+            //Console.WriteLine("vo vremya:   " + srcCrypted);
+            //Console.WriteLine("posle:       " + srcDeCrypted);
+            */
+              
+             
+            /*
+            byte[] key = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            byte[] arrSrc = new byte[] { 11, 12, 13, 14, 15, 16, 17, 18,
+                                         21, 22, 23, 24, 25, 26, 27, 28};
+
+            byte[] arrCr = Cryptor.Encrypt(arrSrc, key);
+
+            byte[] arrDst = Cryptor.Decrypt(arrCr, key);
+
+            for (int i = 0; i < arrSrc.Length; i++)
+            {
+                Console.Write(string.Format("{0:3}",arrSrc[i].ToString("d2")));
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < arrCr.Length; i++)
+            {
+                Console.Write(string.Format("{0:3}", arrCr[i].ToString("d2")));
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < arrDst.Length; i++)
+            {
+                Console.Write(string.Format("{0:3}", arrDst[i].ToString("d2")));
+            }
+            Console.WriteLine();
+            */
+
+
+
+            string srcStr = "лена набила рожу мужа а муж орал и банан ел";
+            string keyStr = "ahtung!!";
+
+            string encrStr = Encoding.Default.GetString(Cryptor.Encrypt(Encoding.Default.GetBytes(srcStr.ToCharArray(), 0, srcStr.Length),
+                    Encoding.Default.GetBytes(keyStr.ToCharArray(), 0, keyStr.Length)));
+
+            string decrStr = Encoding.Default.GetString(Cryptor.Decrypt(Encoding.Default.GetBytes(encrStr.ToCharArray(), 0, encrStr.Length),
+                    Encoding.Default.GetBytes(keyStr.ToCharArray(), 0, keyStr.Length)));
+
+            
+            Console.WriteLine(encrStr);
+            Console.WriteLine(decrStr);
 
 
             Console.ReadLine();

@@ -40,11 +40,8 @@ namespace DesCryptor
         public BitArray(byte[] byteArr)
             : this(byteArr.Length * 8)
         {
-            // количество байт
-            int cnt = byteArr.Length;
-            bits = new bool[cnt * 8];
             // цикл по байтам массива
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < byteArr.Length; i++)
             {
                 // цикл по битам каждого байта в массиве
                 for (int ii = 0; ii < 8; ii++)
@@ -230,6 +227,22 @@ namespace DesCryptor
             for (int i = len - 1; i >= 0; i--)
             {
                 res = (res << 1) | (bits[i] ? 1 : 0);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Преобразует массив бит в массив байт
+        /// </summary>
+        /// <returns></returns>
+        public byte[] ToByteArray()
+        {
+            byte[] res = new byte[(int)Math.Ceiling(this.bits.Length/8.0)];
+
+            for (int i = this.bits.Length - 1; i >=0 ; i--)
+            {
+                res[i / 8] = (byte)(((int)res[i / 8] << 1) | (bits[i] ? 1 : 0));
             }
 
             return res;
