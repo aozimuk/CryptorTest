@@ -37,6 +37,10 @@ namespace DesCryptor
             }
         }
 
+        /// <summary>
+        /// Формирует массив бит из массива byte
+        /// </summary>
+        /// <param name="byteArr"></param>
         public BitArray(byte[] byteArr)
             : this(byteArr.Length * 8)
         {

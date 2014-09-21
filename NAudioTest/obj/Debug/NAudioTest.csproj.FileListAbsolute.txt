@@ -1,0 +1,9 @@
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudioTest.exe.config
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudioTest.exe
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudioTest.pdb
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudio.dll
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudio.WindowsMediaFormat.dll
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudio.xml
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.csprojResolveAssemblyReference.cache
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.exe
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.pdb
