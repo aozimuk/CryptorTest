@@ -7,3 +7,12 @@ C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\bin\Debug\NAudio.x
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.csprojResolveAssemblyReference.cache
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.exe
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioTest\obj\Debug\NAudioTest.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudioTest.exe.config
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\obj\Debug\NAudioTest.exe
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\obj\Debug\NAudioTest.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudioTest.exe
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudioTest.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudio.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudio.WindowsMediaFormat.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\bin\Debug\NAudio.xml
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioTest\obj\Debug\NAudioTest.csprojResolveAssemblyReference.cache
