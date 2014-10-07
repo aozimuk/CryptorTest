@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DesCryptor
 {
+    /// <summary>
+    /// Класс массива бит
+    /// </summary>
     public class BitArray: ICloneable
     {
         /// <summary>

@@ -11,7 +11,30 @@ namespace NAudioTest
     {
         static void Main(string[] args)
         {
-            string mp3file;
+            string mp3FileName = @"[NFS Most Wanted].mp3";
+            string wavFileName = @"[NFS Most Wanted].wav";
+
+            int len = (int)new System.IO.FileInfo(mp3FileName).Length;
+
+            using (Mp3FileReader mp3Reader = new Mp3FileReader(mp3FileName))
+            {
+                using (WaveStream pcmStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3Reader)))
+                {
+                    WaveChannel32 s = new WaveChannel32(pcmStream);
+
+                    
+                }
+                
+                
+            }
+
+            Console.ReadLine();
+            
+            
+            
+            
+            
+            //string mp3file;
 
             //Try to read a mp3 file path until it gets valid one.            
             //do
@@ -25,7 +48,7 @@ namespace NAudioTest
             //} while (!mp3file.EndsWith(".mp3"));
 
 
-            mp3file = @"[NFS Most Wanted].mp3";
+            //
 
 
             //Generate the wav file path for output.
@@ -55,40 +78,32 @@ namespace NAudioTest
             //        WaveFileWriter.CreateWaveFile(wavfile, pcmStream);
             //    }
             //}
-
-
-            string fileName = mp3file;
-
-            WaveStream outStream;
-            if (fileName.EndsWith(".mp3"))
-            {
-                outStream = new Mp3FileReader(fileName);
-            }
-            else if (fileName.EndsWith(".wav"))
-            {
-                outStream = new WaveFileReader(fileName);
-            }
-            else
-            {
-                throw new InvalidOperationException("Can't open this type of file");
-            }
-
-            if (outStream.WaveFormat.Encoding != WaveFormatEncoding.Pcm)
-            {
-                outStream = WaveFormatConversionStream.CreatePcmStream(outStream);
-                outStream = new BlockAlignReductionStream(outStream); // reduces choppiness
-            }
-
-
             
 
-            outStream.Close();
+            //string fileName = mp3file;
 
+            //using (WaveFileReader outStream = new WaveFileReader(fileName))
+            //{
+            //    byte[] header = new byte[2048];
 
-            
+            //    float[] samples = new float[outStream.SampleCount];
 
-            Console.Out.WriteLine("Conversion finish and wav is saved at {0}.\nPress any key to finish.", wavpath);
-            Console.In.ReadLine();
+            //    using (RawSourceWaveStream rawStream = new RawSourceWaveStream(outStream, outStream.WaveFormat))
+            //    {
+            //        rawStream.ToSampleProvider().Read(samples, 0, outStream.SampleCount);
+            //    }
+                
+
+            //    for (int i = 0; i < header.Length; i++)
+            //    {
+            //        Console.Write(header[i] + " ");
+            //    }
+            //}
+          
+
+            //Console.WriteLine();
+            ////Console.Out.WriteLine("Conversion finish and wav is saved at {0}.\nPress any key to finish.", wavpath);
+            //Console.In.ReadLine();
         }
     }
 }
