@@ -9,24 +9,77 @@ namespace NAudioTest
 {
     class Program
     {
+        
+
+
         static void Main(string[] args)
         {
             string mp3FileName = @"[NFS Most Wanted].mp3";
             string wavFileName = @"[NFS Most Wanted].wav";
 
-            int len = (int)new System.IO.FileInfo(mp3FileName).Length;
 
-            using (Mp3FileReader mp3Reader = new Mp3FileReader(mp3FileName))
+            using (Mp3FileReader mp3Stream = new Mp3FileReader(mp3FileName))
             {
-                using (WaveStream pcmStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3Reader)))
-                {
-                    WaveChannel32 s = new WaveChannel32(pcmStream);
+                var wavStream = WaveFormatConversionStream.CreatePcmStream(mp3Stream);
 
-                    
-                }
-                
-                
+                byte[] buffer = new byte[wavStream.Length];
+
+                wavStream.Read(buffer, 0, buffer.Length);
             }
+
+
+
+            using (WaveFileReader wavStream = new WaveFileReader(wavFileName))
+            {
+                byte[] buffer = new byte[wavStream.Length];
+
+                wavStream.Read(buffer, 0, buffer.Length);
+
+
+                int index = -1;
+
+                for (int i = 0; i < buffer.Length - 4; i++)
+                {
+                    if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
+                    {
+                        // RIFF?
+
+                        Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
+
+                        index = i;
+                        break;
+                    }
+                }
+
+                Console.WriteLine(index);
+            }
+
+
+            using (System.IO.FileStream fs = new System.IO.FileStream(wavFileName, System.IO.FileMode.Open))
+            {
+                byte[] buffer = new byte[fs.Length];
+
+                fs.Read(buffer, 0, buffer.Length);
+
+
+                int index = -1;
+
+                for (int i = 0; i < buffer.Length - 4; i++)
+                {
+                    if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
+                    {
+                        // RIFF?
+
+                        Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
+
+                        index = i;
+                        break;
+                    }
+                }
+            }
+
+
+
 
             Console.ReadLine();
             
