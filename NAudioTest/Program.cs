@@ -18,17 +18,6 @@ namespace NAudioTest
             string wavFileName = @"[NFS Most Wanted].wav";
 
 
-            using (Mp3FileReader mp3Stream = new Mp3FileReader(mp3FileName))
-            {
-                var wavStream = WaveFormatConversionStream.CreatePcmStream(mp3Stream);
-
-                byte[] buffer = new byte[wavStream.Length];
-
-                wavStream.Read(buffer, 0, buffer.Length);
-            }
-
-
-
             using (WaveFileReader wavStream = new WaveFileReader(wavFileName))
             {
                 byte[] buffer = new byte[wavStream.Length];
