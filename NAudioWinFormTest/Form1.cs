@@ -78,7 +78,12 @@ namespace NAudioWinFormTest
             string wavFileName = @"..\..\..\audio\[NFS Most Wanted].wav";
 
             //http://www.youtube.com/watch?v=BP2MhB2KQe0
-            //waveViewer1.WaveStream = new WaveFileReader(wavFileName);
+
+
+            customWaveViewer1.WaveStream = new WaveFileReader(new System.IO.FileStream(wavFileName, System.IO.FileMode.Open));
+            
+            customWaveViewer1.FitToScreen();
+
         }
     }
 }

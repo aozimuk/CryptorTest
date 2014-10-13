@@ -55,12 +55,20 @@
             // 
             // customWaveViewer1
             // 
-            this.customWaveViewer1.Location = new System.Drawing.Point(12, 274);
+            this.customWaveViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.customWaveViewer1.AxisPenColor = System.Drawing.Color.Red;
+            this.customWaveViewer1.AxisPenWidth = 1F;
+            this.customWaveViewer1.BackColor = System.Drawing.Color.Gainsboro;
+            this.customWaveViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customWaveViewer1.Location = new System.Drawing.Point(12, 213);
             this.customWaveViewer1.Name = "customWaveViewer1";
             this.customWaveViewer1.SamplesPerPixel = 128;
-            this.customWaveViewer1.Size = new System.Drawing.Size(689, 150);
+            this.customWaveViewer1.Size = new System.Drawing.Size(689, 211);
             this.customWaveViewer1.StartPosition = ((long)(0));
             this.customWaveViewer1.TabIndex = 3;
+            this.customWaveViewer1.WavePenColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.customWaveViewer1.WavePenWidth = 1F;
             this.customWaveViewer1.WaveStream = null;
             // 
             // Form1
