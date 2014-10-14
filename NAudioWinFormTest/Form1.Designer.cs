@@ -63,8 +63,8 @@
             this.customWaveViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customWaveViewer1.Location = new System.Drawing.Point(12, 213);
             this.customWaveViewer1.Name = "customWaveViewer1";
-            this.customWaveViewer1.SamplesPerPixel = 128;
-            this.customWaveViewer1.Size = new System.Drawing.Size(689, 211);
+            this.customWaveViewer1.SamplesPerPixel = 0;
+            this.customWaveViewer1.Size = new System.Drawing.Size(700, 211);
             this.customWaveViewer1.StartPosition = ((long)(0));
             this.customWaveViewer1.TabIndex = 3;
             this.customWaveViewer1.WavePenColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 436);
+            this.ClientSize = new System.Drawing.Size(724, 436);
             this.Controls.Add(this.customWaveViewer1);
             this.Controls.Add(this.btn_testWaveViewer);
             this.Controls.Add(this.button1);

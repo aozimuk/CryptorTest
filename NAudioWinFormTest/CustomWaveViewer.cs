@@ -23,6 +23,7 @@ namespace NAudioWinFormTest
         private WaveStream waveStream;
         private int samplesPerPixel;
         private long startPosition;
+        private HScrollBar hScrollBar1;
         private int bytesPerSample;
                        
         public CustomWaveViewer()
@@ -38,6 +39,9 @@ namespace NAudioWinFormTest
             this.AxisPenWidth = 1;
 
             this.Font = new System.Drawing.Font("Consolas", 8);
+
+            hScrollBar1.Minimum = 0;
+            
         }
         
         /// <summary>
@@ -140,6 +144,7 @@ namespace NAudioWinFormTest
                 if (waveStream != null)
                 {
                     bytesPerSample = (waveStream.WaveFormat.BitsPerSample / 8) * waveStream.WaveFormat.Channels;
+                    hScrollBar1.Maximum = (int)(waveStream.Length / bytesPerSample);
                 }
                 this.Invalidate();
             }
@@ -156,7 +161,10 @@ namespace NAudioWinFormTest
             }
             set
             {
-                samplesPerPixel = Math.Max(1,value);
+                if (waveStream != null && value <= (int)(waveStream.Length / bytesPerSample) / this.Width)
+                {
+                    samplesPerPixel = Math.Max(1, value);
+                }
                 this.Invalidate();
             }
         }
@@ -172,8 +180,15 @@ namespace NAudioWinFormTest
             }
             set
             {
-             // нужна проверка чтоб не сдвигалось влево
-                startPosition = Math.Max(0, value);
+
+                if (waveStream != null && Width * samplesPerPixel * bytesPerSample + value < waveStream.Length)
+                {
+                    startPosition = Math.Max(0, value);
+                }
+                else
+                {
+                    startPosition = 0;
+                }
                 this.Invalidate();
             }
         }
@@ -277,8 +292,31 @@ namespace NAudioWinFormTest
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.SuspendLayout();
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBar1.Location = new System.Drawing.Point(0, 133);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(150, 17);
+            this.hScrollBar1.TabIndex = 0;
+            this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
+            // 
+            // CustomWaveViewer
+            // 
+            this.Controls.Add(this.hScrollBar1);
+            this.Name = "CustomWaveViewer";
+            this.ResumeLayout(false);
+
         }
         #endregion
+
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            StartPosition = (long)e.NewValue * (long)bytesPerSample;
+        }
     }
 }
