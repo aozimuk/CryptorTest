@@ -17,7 +17,6 @@ namespace NAudioWinFormTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string wavFileName = @"..\..\..\audio\[NFS Most Wanted].wav";
 
             using (System.IO.FileStream fs = new System.IO.FileStream(wavFileName, System.IO.FileMode.Open))
             {
@@ -73,16 +72,25 @@ namespace NAudioWinFormTest
             }
         }
 
+        string wavFileName = @"..\..\..\audio\[NFS Most Wanted].wav";
+        WaveFileReader wavStream;
+
         private void btn_testWaveViewer_Click(object sender, EventArgs e)
-        {
-            string wavFileName = @"..\..\..\audio\[NFS Most Wanted].wav";
-
-            //http://www.youtube.com/watch?v=BP2MhB2KQe0
-
-
-            customWaveViewer1.WaveStream = new WaveFileReader(new System.IO.FileStream(wavFileName, System.IO.FileMode.Open));
+        {             
+            try
+            {
+                if (customWaveViewer1.WaveStream != null)
+                {
+                    customWaveViewer1.WaveStream.Close();
+                }
+                customWaveViewer1.WaveStream = new WaveFileReader(new System.IO.FileStream(wavFileName, System.IO.FileMode.Open));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("время: {0} :: ошибка: {1}", DateTime.Now.TimeOfDay, ex.Message));
+            }
             
-            customWaveViewer1.FitToScreen();
+//            customWaveViewer1.FitToScreen();
 
         }
     }
