@@ -16,6 +16,7 @@ namespace NAudioWinFormTest
     {
         private System.Collections.Generic.List<IDisposable> objToDispose;
         private WaveStream waveStream;
+        
         private HScrollBar hScrollBar1;
 
         private int samplesPerPixel;
@@ -28,7 +29,6 @@ namespace NAudioWinFormTest
 
         public CustomWaveViewer()
         {
-            // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
 
             objToDispose = new System.Collections.Generic.List<IDisposable>();
@@ -50,14 +50,15 @@ namespace NAudioWinFormTest
             samplesCount = -1;
 
             hScrollBar1.Minimum = 0;
+            hScrollBar1.Value = 0;
             hScrollBar1.Maximum = 1;
             hScrollBar1.Visible = false;
 
-            DisplayHeight = Height - hScrollBar1.Height - 4;
-            DisplayWidth = ClientRectangle.Width;
+            UpdateDisplaySize();
+
+            VerticalLinesCount = 10;
         }
-
-
+        
         #region Properties
 
         public Color WavePenColor { get; set; }
@@ -67,6 +68,8 @@ namespace NAudioWinFormTest
         public float AxisPenWidth { get; set; }
         
         public override System.Drawing.Font Font { get; set; }
+
+        public int VerticalLinesCount { get; set; }
 
         public WaveStream WaveStream
         {
@@ -113,10 +116,10 @@ namespace NAudioWinFormTest
         }
 
         #endregion
-        
-        
-        
-        #region Ovverride methods
+
+
+
+        #region Ovverride methods OnKeyDown, OnMouseWheel, OnPaint, OnResize, Dispose
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -132,12 +135,12 @@ namespace NAudioWinFormTest
             if (Control.ModifierKeys == Keys.Control)
             {
                 // Масштабирование
-                SamplesPerPixel -= e.Delta * 10;
+                SamplesPerPixel -= (e.Delta / 12) * 10 * bytesPerSample;
             }
             else
             {
                 // Прокрутка (вправо/влево)
-                StartPosition += e.Delta * 10;
+                StartPosition += (e.Delta / 12) * 10 * bytesPerSample;
             }
             hScrollBar1.Value = Math.Min(hScrollBar1.Maximum,(int)StartPosition / bytesPerSample);
             base.OnMouseWheel(e);
@@ -148,85 +151,74 @@ namespace NAudioWinFormTest
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {       
-
             if (waveStream != null)
             {
-                waveStream.Position = 0;
-                int bytesRead;
-                byte[] waveData = new byte[samplesPerPixel * bytesPerSample]; // [bytes per pixel]
-
-                //e.ClipRectangle.Left равен 0, зачем это слогаемое ваще нужно?? хз
-                waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
-
-                long leftSample = waveStream.Position / bytesPerSample;
                 
-                // отрисовка волны
-                using (Pen wavePen = new Pen(WavePenColor, WavePenWidth))
-                {
-                    for (float x = e.ClipRectangle.X; x < e.ClipRectangle.Right; x += 1)
-                    {
-                        short low = 0;
-                        short high = 0;
-                        bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
-                        if (bytesRead == 0)
-                            break;
-                        for (int n = 0; n < bytesRead; n += 2)
-                        {
-                            short sample = BitConverter.ToInt16(waveData, n);
-                            if (sample < low) low = sample;
-                            if (sample > high) high = sample;
-                        }
-                        float lowPercent = ((((float)low) - short.MinValue) / ushort.MaxValue);
-                        float highPercent = ((((float)high) - short.MinValue) / ushort.MaxValue);
-                        e.Graphics.DrawLine(wavePen, x, DisplayHeight * lowPercent, x, DisplayHeight * highPercent);
-                    }
-                }
+                long leftSample = startPosition / bytesPerSample;
+                
+                DrawWave(e.Graphics, e.ClipRectangle.X, e.ClipRectangle.Right, waveStream);
 
-                // отрисовка осей координат и сетки
-                using (Pen axisPen = new Pen(AxisPenColor, AxisPenWidth))
-                {
-                    e.Graphics.DrawLine(axisPen, new Point(0, DisplayHeight / 2), new Point(DisplayWidth, DisplayHeight / 2));
-                    int vertLineCount = 11;
-                    int step = DisplayWidth / (vertLineCount);
-                    for (int i = 1; i < vertLineCount; i++)
-                    {
-                        e.Graphics.DrawLine(axisPen, new Point(i * step, 0), new Point(i * step, DisplayHeight));
-                    }
-
-                    
-                    // начало координат
-                    e.Graphics.DrawString(
-                          leftSample.ToString()
-                        , Font
-                        , axisPen.Brush
-                        , new PointF(0, DisplayHeight / 2));
-                    // конец координат
-                    e.Graphics.DrawString(
-                        (leftSample + DisplayWidth * samplesPerPixel).ToString()
-                        , Font
-                        , axisPen.Brush
-                        , new PointF(
-                              DisplayWidth - e.Graphics.MeasureString((leftSample + DisplayWidth * samplesPerPixel).ToString()
-                            , Font).Width
-                            , DisplayHeight / 2));
-                }
+                DrawAxisGrid(e.Graphics, VerticalLinesCount, leftSample.ToString(), (leftSample + DisplayWidth * samplesPerPixel).ToString());
             }
 
             base.OnPaint(e);
         }
 
-        private void DrawAxisGrid(Graphics g, int verticalLineCount, string startLabel, string endLabel)
+        private void DrawWave(Graphics g, int displayLeft, int displayRight, WaveStream ws)
         {
-            // отрисовка осей координат и сетки
+            if (waveStream != null)
+            {
+                int bytesRead = 0;
+                int bytesPerPixel = samplesPerPixel * bytesPerSample;
+                byte[] readWaveData = new byte[bytesPerPixel];
+
+                ws.Position = startPosition;
+
+                using (Pen wavePen = new Pen(WavePenColor, WavePenWidth))
+                {
+                    for (int x = displayLeft; x < displayRight; x++)
+                    {
+                        short low = 0;
+                        short high = 0;
+                        bytesRead = ws.Read(readWaveData, 0, bytesPerPixel);
+
+                        if (bytesRead > 0)
+                        {
+                            // выбираем самое маленькое и самое большое значение сэмплов среди считанных данных
+                            for (int i = 0; i < bytesRead; i += 2)
+                            {
+                                short sample = BitConverter.ToInt16(readWaveData, i);
+                                if (sample < low) low = sample;
+                                if (sample > high) high = sample;
+                            }
+                            
+                            float lowPercent = ((((float)low) - short.MinValue) / ushort.MaxValue);
+                            float highPercent = ((((float)high) - short.MinValue) / ushort.MaxValue);
+                            
+                            g.DrawLine(wavePen, x, DisplayHeight * lowPercent, x, DisplayHeight * highPercent);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DrawAxisGrid(Graphics g, int verticalLinesCount, string startLabel, string endLabel)
+        {
             using (Pen axisPen = new Pen(AxisPenColor, AxisPenWidth))
             {
+                // ось
                 g.DrawLine(axisPen, new Point(0, DisplayHeight / 2), new Point(DisplayWidth, DisplayHeight / 2));
-                int step = DisplayWidth / (verticalLineCount);
-                for (int i = 1; i < verticalLineCount; i++)
+                
+                // cетка
+                int step = DisplayWidth / (verticalLinesCount);
+                for (int i = 1; i < verticalLinesCount; i++)
                 {
                     g.DrawLine(axisPen, new Point(i * step, 0), new Point(i * step, DisplayHeight));
                 }
-
 
                 // начало координат
                 g.DrawString(
@@ -234,22 +226,20 @@ namespace NAudioWinFormTest
                     , Font
                     , axisPen.Brush
                     , new PointF(0, DisplayHeight / 2));
+
                 // конец координат
                 g.DrawString(
                     endLabel
                     , Font
                     , axisPen.Brush
-                    , new PointF(
-                          DisplayWidth - g.MeasureString(endLabel.ToString()
-                        , Font).Width
-                        , DisplayHeight / 2));
+                    , new PointF(DisplayWidth - g.MeasureString(endLabel.ToString(), Font).Width, DisplayHeight / 2));
             }
         }
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            GetDisplaySize();
+            UpdateDisplaySize();
             FitToScreen();
         }
 
@@ -320,7 +310,7 @@ namespace NAudioWinFormTest
             waveStream = value;
             if (waveStream != null)
             {
-                GetDisplaySize();
+                UpdateDisplaySize();
 
                 bytesPerSample = (waveStream.WaveFormat.BitsPerSample / 8) * waveStream.WaveFormat.Channels;
                 samplesCount = (int)(waveStream.Length / bytesPerSample);
@@ -382,7 +372,7 @@ namespace NAudioWinFormTest
             SetSamplesPerPixelAndDraw(SamplesCount / DisplayWidth);
         }
 
-        private void GetDisplaySize()
+        private void UpdateDisplaySize()
         {
             DisplayHeight = Height - hScrollBar1.Height - 4;
             DisplayWidth = ClientRectangle.Width;
@@ -391,18 +381,14 @@ namespace NAudioWinFormTest
         #endregion
 
 
-
+        #region Zoom region commented
+        /*
+         
         private void DrawVerticalLine(int x)
         {
             ControlPaint.DrawReversibleLine(PointToScreen(new Point(x, 0)), PointToScreen(new Point(x, DisplayHeight)), Color.Black);
         }
-
-
-
-
-
-        #region Zoom region commented
-        /*
+         
         public void Zoom(int leftSample, int rightSample)
         {
             startPosition = leftSample * bytesPerSample;
@@ -455,6 +441,6 @@ namespace NAudioWinFormTest
         */
         #endregion
 
-   
+
     }
 }

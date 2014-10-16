@@ -30,7 +30,10 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.btn_testWaveViewer = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.samplesPerPixLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.customWaveViewer1 = new NAudioWinFormTest.CustomWaveViewer();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -53,6 +56,22 @@
             this.btn_testWaveViewer.UseVisualStyleBackColor = true;
             this.btn_testWaveViewer.Click += new System.EventHandler(this.btn_testWaveViewer_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.samplesPerPixLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 414);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(724, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // samplesPerPixLabel
+            // 
+            this.samplesPerPixLabel.Name = "samplesPerPixLabel";
+            this.samplesPerPixLabel.Size = new System.Drawing.Size(118, 17);
+            this.samplesPerPixLabel.Text = "toolStripStatusLabel1";
+            // 
             // customWaveViewer1
             // 
             this.customWaveViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -61,12 +80,13 @@
             this.customWaveViewer1.AxisPenWidth = 1F;
             this.customWaveViewer1.BackColor = System.Drawing.Color.Gainsboro;
             this.customWaveViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.customWaveViewer1.Location = new System.Drawing.Point(12, 213);
+            this.customWaveViewer1.Location = new System.Drawing.Point(12, 200);
             this.customWaveViewer1.Name = "customWaveViewer1";
             this.customWaveViewer1.SamplesPerPixel = -1;
             this.customWaveViewer1.Size = new System.Drawing.Size(700, 211);
             this.customWaveViewer1.StartPosition = ((long)(0));
             this.customWaveViewer1.TabIndex = 3;
+            this.customWaveViewer1.VerticalLinesCount = 10;
             this.customWaveViewer1.WavePenColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.customWaveViewer1.WavePenWidth = 1F;
             this.customWaveViewer1.WaveStream = null;
@@ -76,13 +96,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 436);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.customWaveViewer1);
             this.Controls.Add(this.btn_testWaveViewer);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "NAudioWinFormTest";
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -91,6 +115,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_testWaveViewer;
         private CustomWaveViewer customWaveViewer1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel samplesPerPixLabel;
     }
 }
 
