@@ -30,6 +30,7 @@ namespace NAudioWinFormTest
         {
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
+
             objToDispose = new System.Collections.Generic.List<IDisposable>();
             objToDispose.Add(hScrollBar1);
 
@@ -214,9 +215,41 @@ namespace NAudioWinFormTest
             base.OnPaint(e);
         }
 
+        private void DrawAxisGrid(Graphics g, int verticalLineCount, string startLabel, string endLabel)
+        {
+            // отрисовка осей координат и сетки
+            using (Pen axisPen = new Pen(AxisPenColor, AxisPenWidth))
+            {
+                g.DrawLine(axisPen, new Point(0, DisplayHeight / 2), new Point(DisplayWidth, DisplayHeight / 2));
+                int step = DisplayWidth / (verticalLineCount);
+                for (int i = 1; i < verticalLineCount; i++)
+                {
+                    g.DrawLine(axisPen, new Point(i * step, 0), new Point(i * step, DisplayHeight));
+                }
+
+
+                // начало координат
+                g.DrawString(
+                      startLabel
+                    , Font
+                    , axisPen.Brush
+                    , new PointF(0, DisplayHeight / 2));
+                // конец координат
+                g.DrawString(
+                    endLabel
+                    , Font
+                    , axisPen.Brush
+                    , new PointF(
+                          DisplayWidth - g.MeasureString(endLabel.ToString()
+                        , Font).Width
+                        , DisplayHeight / 2));
+            }
+        }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
+            GetDisplaySize();
             FitToScreen();
         }
 
@@ -287,8 +320,8 @@ namespace NAudioWinFormTest
             waveStream = value;
             if (waveStream != null)
             {
-                DisplayHeight = Height - hScrollBar1.Height - 4;
-                DisplayWidth = ClientRectangle.Width;
+                GetDisplaySize();
+
                 bytesPerSample = (waveStream.WaveFormat.BitsPerSample / 8) * waveStream.WaveFormat.Channels;
                 samplesCount = (int)(waveStream.Length / bytesPerSample);
                 FitToScreen();
@@ -343,10 +376,16 @@ namespace NAudioWinFormTest
         /// <summary>
         /// Растянуть волну по ширине компоненты
         /// </summary>
-        private void FitToScreen()
+        public void FitToScreen()
         {
             startPosition = 0;
             SetSamplesPerPixelAndDraw(SamplesCount / DisplayWidth);
+        }
+
+        private void GetDisplaySize()
+        {
+            DisplayHeight = Height - hScrollBar1.Height - 4;
+            DisplayWidth = ClientRectangle.Width;
         }
 
         #endregion

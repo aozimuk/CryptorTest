@@ -63,7 +63,7 @@
             this.customWaveViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customWaveViewer1.Location = new System.Drawing.Point(12, 213);
             this.customWaveViewer1.Name = "customWaveViewer1";
-            this.customWaveViewer1.SamplesPerPixel = 0;
+            this.customWaveViewer1.SamplesPerPixel = -1;
             this.customWaveViewer1.Size = new System.Drawing.Size(700, 211);
             this.customWaveViewer1.StartPosition = ((long)(0));
             this.customWaveViewer1.TabIndex = 3;
@@ -81,6 +81,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "NAudioWinFormTest";
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.ResumeLayout(false);
 
         }

@@ -93,5 +93,12 @@ namespace NAudioWinFormTest
 //            customWaveViewer1.FitToScreen();
 
         }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            customWaveViewer1.Invalidate();
+        }
+
+
     }
 }
