@@ -4,3 +4,9 @@ D:\app\ID3Tags\ID3Tags\ID3Tags\bin\Debug\ID3Tags.pdb
 D:\app\ID3Tags\ID3Tags\ID3Tags\obj\Debug\ID3Tags.csprojResolveAssemblyReference.cache
 D:\app\ID3Tags\ID3Tags\ID3Tags\obj\Debug\ID3Tags.exe
 D:\app\ID3Tags\ID3Tags\ID3Tags\obj\Debug\ID3Tags.pdb
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\bin\Debug\ID3Tags.exe.config
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\bin\Debug\ID3Tags.exe
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\bin\Debug\ID3Tags.pdb
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\obj\Debug\ID3Tags.csprojResolveAssemblyReference.cache
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\obj\Debug\ID3Tags.exe
+C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\ID3Tags\ID3Tags\obj\Debug\ID3Tags.pdb

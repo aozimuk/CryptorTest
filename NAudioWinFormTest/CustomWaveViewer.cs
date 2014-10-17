@@ -24,41 +24,28 @@ namespace NAudioWinFormTest
         private int bytesPerSample;
         private int samplesCount;
 
-        private int DisplayHeight { get; set; }
-        private int DisplayWidth { get; set; }
+        #region Events
 
-        public CustomWaveViewer()
+        public delegate void CollectionChangeEventHandler(object sender, ChangeEventArgs e);
+
+        public event CollectionChangeEventHandler StartPositionChanged;
+        public event CollectionChangeEventHandler SamplesPerPixelChanged;
+
+
+        protected virtual void OnStartPositionChanged(ChangeEventArgs e)
         {
-            InitializeComponent();
-
-            objToDispose = new System.Collections.Generic.List<IDisposable>();
-            objToDispose.Add(hScrollBar1);
-
-            this.DoubleBuffered = true;
-
-            this.WavePenColor = Color.DodgerBlue;
-            this.WavePenWidth = 1;
-
-            this.AxisPenColor = Color.LimeGreen;
-            this.AxisPenWidth = 1;
-
-            this.Font = new System.Drawing.Font("Consolas", 8);
-
-            samplesPerPixel = -1;
-            startPosition = -1;
-            bytesPerSample = -1;
-            samplesCount = -1;
-
-            hScrollBar1.Minimum = 0;
-            hScrollBar1.Value = 0;
-            hScrollBar1.Maximum = 1;
-            hScrollBar1.Visible = false;
-
-            UpdateDisplaySize();
-
-            VerticalLinesCount = 10;
+            if (StartPositionChanged != null)
+                StartPositionChanged(this, e);
         }
-        
+
+        protected virtual void OnSamplesPerPixelChanged(ChangeEventArgs e)
+        {
+            if (SamplesPerPixelChanged != null)
+                SamplesPerPixelChanged(this, e);
+        }
+
+        #endregion
+
         #region Properties
 
         public Color WavePenColor { get; set; }
@@ -70,6 +57,9 @@ namespace NAudioWinFormTest
         public override System.Drawing.Font Font { get; set; }
 
         public int VerticalLinesCount { get; set; }
+
+        private int DisplayHeight { get; set; }
+        private int DisplayWidth { get; set; }
 
         public WaveStream WaveStream
         {
@@ -118,6 +108,42 @@ namespace NAudioWinFormTest
         #endregion
 
 
+        public CustomWaveViewer()
+        {
+            InitializeComponent();
+
+            objToDispose = new System.Collections.Generic.List<IDisposable>();
+            objToDispose.Add(hScrollBar1);
+
+            this.DoubleBuffered = true;
+
+            this.WavePenColor = Color.DodgerBlue;
+            this.WavePenWidth = 1;
+
+            this.AxisPenColor = Color.LimeGreen;
+            this.AxisPenWidth = 1;
+
+            this.Font = new System.Drawing.Font("Consolas", 8);
+
+            samplesPerPixel = -1;
+            startPosition = -1;
+            bytesPerSample = -1;
+            samplesCount = -1;
+
+            hScrollBar1.Minimum = 0;
+            hScrollBar1.Value = 0;
+            hScrollBar1.Maximum = 1;
+            hScrollBar1.Visible = false;
+
+            UpdateDisplaySize();
+
+            VerticalLinesCount = 10;
+        }
+
+        // добавить волну для отображения
+        public void AddWave(WaveStream ws)
+        {
+        }
 
         #region Ovverride methods OnKeyDown, OnMouseWheel, OnPaint, OnResize, Dispose
 
@@ -140,9 +166,9 @@ namespace NAudioWinFormTest
             else
             {
                 // Прокрутка (вправо/влево)
-                StartPosition += (e.Delta / 12) * 10 * bytesPerSample;
+                StartPosition += (e.Delta / 12) * SamplesPerPixel * bytesPerSample;
             }
-            hScrollBar1.Value = Math.Min(hScrollBar1.Maximum,(int)StartPosition / bytesPerSample);
+            hScrollBar1.Value = Math.Min(hScrollBar1.Maximum, (int)StartPosition / bytesPerSample);
             base.OnMouseWheel(e);
         }
              
@@ -153,8 +179,9 @@ namespace NAudioWinFormTest
         {       
             if (waveStream != null)
             {
-                
-                long leftSample = startPosition / bytesPerSample;
+                if (e.ClipRectangle.Left != 0) MessageBox.Show("как это возможно: " + e.ClipRectangle.Left);
+
+                long leftSample = startPosition / bytesPerSample; //startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel); 
                 
                 DrawWave(e.Graphics, e.ClipRectangle.X, e.ClipRectangle.Right, waveStream);
 
@@ -163,7 +190,7 @@ namespace NAudioWinFormTest
 
             base.OnPaint(e);
         }
-
+        
         private void DrawWave(Graphics g, int displayLeft, int displayRight, WaveStream ws)
         {
             if (waveStream != null)
@@ -314,7 +341,8 @@ namespace NAudioWinFormTest
 
                 bytesPerSample = (waveStream.WaveFormat.BitsPerSample / 8) * waveStream.WaveFormat.Channels;
                 samplesCount = (int)(waveStream.Length / bytesPerSample);
-                FitToScreen();
+                //FitToScreen();
+                FitToWaveLength();
                 hScrollBar1.Visible = true;
                 objToDispose.Add(waveStream);
             }
@@ -327,8 +355,11 @@ namespace NAudioWinFormTest
         private void SetSamplesPerPixelAndDraw(int value)
         {
             int maxSamplesPerPixel = SamplesCount / DisplayWidth;
+            
             if (waveStream != null)
             {
+                int oldValue = samplesPerPixel;
+
                 if (value < maxSamplesPerPixel)
                 {
                     samplesPerPixel = Math.Max(1, value);
@@ -339,6 +370,9 @@ namespace NAudioWinFormTest
                     samplesPerPixel = value;
                     hScrollBar1.Maximum = 1;
                 }
+
+                OnSamplesPerPixelChanged(new ChangeEventArgs(oldValue, samplesPerPixel));
+                
                 this.Invalidate();
             }
         }
@@ -351,6 +385,8 @@ namespace NAudioWinFormTest
             long bytesToEnd = (long)DisplayWidth * samplesPerPixel * bytesPerSample;
             if (waveStream != null)
             {
+                long oldValue = startPosition;
+
                 if (bytesToEnd + value < waveStream.Length)
                 {
                     startPosition = Math.Max(0, value);
@@ -359,7 +395,11 @@ namespace NAudioWinFormTest
                 {
                     startPosition = value;
                 }
+
+                OnStartPositionChanged(new ChangeEventArgs(oldValue / bytesPerSample, startPosition / bytesPerSample));
+
                 this.Invalidate();
+                
             }
         }
 
@@ -370,6 +410,15 @@ namespace NAudioWinFormTest
         {
             startPosition = 0;
             SetSamplesPerPixelAndDraw(SamplesCount / DisplayWidth);
+        }
+
+        /// <summary>
+        /// Растянуть по длине волны
+        /// </summary>
+        public void FitToWaveLength()
+        {
+            startPosition = 0;
+            SetSamplesPerPixelAndDraw(1);
         }
 
         private void UpdateDisplaySize()

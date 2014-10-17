@@ -32,7 +32,9 @@
             this.btn_testWaveViewer = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.samplesPerPixLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.startPositionLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.customWaveViewer1 = new NAudioWinFormTest.CustomWaveViewer();
+            this.separator1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +61,9 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.samplesPerPixLabel});
+            this.samplesPerPixLabel,
+            this.separator1,
+            this.startPositionLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 414);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(724, 22);
@@ -69,8 +73,14 @@
             // samplesPerPixLabel
             // 
             this.samplesPerPixLabel.Name = "samplesPerPixLabel";
-            this.samplesPerPixLabel.Size = new System.Drawing.Size(118, 17);
-            this.samplesPerPixLabel.Text = "toolStripStatusLabel1";
+            this.samplesPerPixLabel.Size = new System.Drawing.Size(110, 17);
+            this.samplesPerPixLabel.Text = "samplesPerPixLabel";
+            // 
+            // startPositionLabel
+            // 
+            this.startPositionLabel.Name = "startPositionLabel";
+            this.startPositionLabel.Size = new System.Drawing.Size(101, 17);
+            this.startPositionLabel.Text = "startPositionLabel";
             // 
             // customWaveViewer1
             // 
@@ -90,6 +100,14 @@
             this.customWaveViewer1.WavePenColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.customWaveViewer1.WavePenWidth = 1F;
             this.customWaveViewer1.WaveStream = null;
+            this.customWaveViewer1.StartPositionChanged += new NAudioWinFormTest.CustomWaveViewer.CollectionChangeEventHandler(this.customWaveViewer1_StartPositionChanged);
+            this.customWaveViewer1.SamplesPerPixelChanged += new NAudioWinFormTest.CustomWaveViewer.CollectionChangeEventHandler(this.customWaveViewer1_SamplesPerPixelChanged);
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
+            this.separator1.Size = new System.Drawing.Size(13, 17);
+            this.separator1.Text = "||";
             // 
             // Form1
             // 
@@ -117,6 +135,8 @@
         private CustomWaveViewer customWaveViewer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel samplesPerPixLabel;
+        private System.Windows.Forms.ToolStripStatusLabel startPositionLabel;
+        private System.Windows.Forms.ToolStripStatusLabel separator1;
     }
 }
 

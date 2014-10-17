@@ -99,6 +99,15 @@ namespace NAudioWinFormTest
             customWaveViewer1.Invalidate();
         }
 
+        private void customWaveViewer1_SamplesPerPixelChanged(object sender, ChangeEventArgs e)
+        {
+            samplesPerPixLabel.Text = string.Format("SamplesPerPixel: {0}", e.NewValue);
+        }
+
+        private void customWaveViewer1_StartPositionChanged(object sender, ChangeEventArgs e)
+        {
+            startPositionLabel.Text = string.Format("StartPosition: {0}", e.NewValue);
+        }
 
     }
 }
