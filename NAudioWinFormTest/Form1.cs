@@ -73,25 +73,10 @@ namespace NAudioWinFormTest
         }
 
         string wavFileName = @"..\..\..\audio\[NFS Most Wanted].wav";
-        WaveFileReader wavStream;
 
         private void btn_testWaveViewer_Click(object sender, EventArgs e)
-        {             
-            try
-            {
-                if (customWaveViewer1.WaveStream != null)
-                {
-                    customWaveViewer1.WaveStream.Close();
-                }
-                customWaveViewer1.WaveStream = new WaveFileReader(new System.IO.FileStream(wavFileName, System.IO.FileMode.Open));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(string.Format("время: {0} :: ошибка: {1}", DateTime.Now.TimeOfDay, ex.Message));
-            }
-            
-//            customWaveViewer1.FitToScreen();
-
+        {
+            customWaveViewer1.AddFisrtWave(new WaveFileReader(new System.IO.FileStream(wavFileName, System.IO.FileMode.Open)));
         }
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
