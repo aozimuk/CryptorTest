@@ -1,0 +1,7 @@
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\bin\Debug\CustomComponents.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\bin\Debug\CustomComponents.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\bin\Debug\NAudio.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\bin\Debug\NAudio.xml
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\obj\Debug\CustomComponents.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\obj\Debug\CustomComponents.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CustomComponents\obj\Debug\CustomComponents.csprojResolveAssemblyReference.cache

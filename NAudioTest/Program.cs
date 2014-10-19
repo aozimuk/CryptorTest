@@ -14,60 +14,69 @@ namespace NAudioTest
 
         static void Main(string[] args)
         {
-            string mp3FileName = @"[NFS Most Wanted].mp3";
-            string wavFileName = @"[NFS Most Wanted].wav";
+            //string mp3FileName = @"[NFS Most Wanted].mp3";
+            //string wavFileName = @"[NFS Most Wanted].wav";
 
 
-            using (WaveFileReader wavStream = new WaveFileReader(wavFileName))
-            {
-                byte[] buffer = new byte[wavStream.Length];
+            //using (WaveFileReader wavStream = new WaveFileReader(wavFileName))
+            //{
+            //    byte[] buffer = new byte[wavStream.Length];
 
-                wavStream.Read(buffer, 0, buffer.Length);
-
-
-                int index = -1;
-
-                for (int i = 0; i < buffer.Length - 4; i++)
-                {
-                    if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
-                    {
-                        // RIFF?
-
-                        Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
-
-                        index = i;
-                        break;
-                    }
-                }
-
-                Console.WriteLine(index);
-            }
+            //    wavStream.Read(buffer, 0, buffer.Length);
 
 
-            using (System.IO.FileStream fs = new System.IO.FileStream(wavFileName, System.IO.FileMode.Open))
-            {
-                byte[] buffer = new byte[fs.Length];
+            //    int index = -1;
 
-                fs.Read(buffer, 0, buffer.Length);
+            //    for (int i = 0; i < buffer.Length - 4; i++)
+            //    {
+            //        if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
+            //        {
+            //            // RIFF?
 
+            //            Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
 
-                int index = -1;
+            //            index = i;
+            //            break;
+            //        }
+            //    }
 
-                for (int i = 0; i < buffer.Length - 4; i++)
-                {
-                    if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
-                    {
-                        // RIFF?
-
-                        Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
-
-                        index = i;
-                        break;
-                    }
-                }
-            }
+            //    Console.WriteLine(index);
+            //}
 
 
+            //using (System.IO.FileStream fs = new System.IO.FileStream(wavFileName, System.IO.FileMode.Open))
+            //{
+            //    byte[] buffer = new byte[fs.Length];
+
+            //    fs.Read(buffer, 0, buffer.Length);
+
+
+            //    int index = -1;
+
+            //    for (int i = 0; i < buffer.Length - 4; i++)
+            //    {
+            //        if (buffer[i] == 82)// && buffer[i + 1] == 73 && buffer[i + 2] == 70 && buffer[i + 3] == 70)
+            //        {
+            //            // RIFF?
+
+            //            Console.WriteLine(buffer[i] + " " + buffer[i + 1] + " " + buffer[i + 2] + " " + buffer[i + 3]);
+
+            //            index = i;
+            //            break;
+            //        }
+            //    }
+            //}
+
+
+            byte[] msg = new byte[] { 1, 0, 2, 3 };
+
+            short v = BitConverter.ToInt16(msg, 0);
+            byte[] varr =BitConverter.GetBytes(v);
+
+            Console.WriteLine(BitConverter.ToInt16(msg, 0));
+            Console.WriteLine(BitConverter.ToInt16(msg, 1));
+            Console.WriteLine(BitConverter.ToInt16(msg, 2));
+            
 
 
             Console.ReadLine();

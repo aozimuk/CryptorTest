@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ID3Tags", "ID3Tags\ID3Tags\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAudioWinFormTest", "NAudioWinFormTest\NAudioWinFormTest.csproj", "{46C9CA81-4439-4E0F-9AF4-447FDDFE08E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomComponents", "CustomComponents\CustomComponents.csproj", "{5EAD94E8-C030-47FD-ADDE-64E8CF4F4BBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{46C9CA81-4439-4E0F-9AF4-447FDDFE08E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C9CA81-4439-4E0F-9AF4-447FDDFE08E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C9CA81-4439-4E0F-9AF4-447FDDFE08E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAD94E8-C030-47FD-ADDE-64E8CF4F4BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAD94E8-C030-47FD-ADDE-64E8CF4F4BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAD94E8-C030-47FD-ADDE-64E8CF4F4BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAD94E8-C030-47FD-ADDE-64E8CF4F4BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

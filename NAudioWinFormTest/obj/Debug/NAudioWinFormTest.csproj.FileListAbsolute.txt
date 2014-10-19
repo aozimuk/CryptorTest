@@ -2,7 +2,6 @@ C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormT
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\NAudioWinFormTest.exe
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\NAudioWinFormTest.pdb
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\NAudio.dll
-C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\NAudio.WindowsMediaFormat.dll
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\NAudio.xml
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.csprojResolveAssemblyReference.cache
 C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.Form1.resources
@@ -23,4 +22,5 @@ C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioWinFormTest\obj\Debug\N
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.Properties.Resources.resources
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.csproj.GenerateResource.Cache
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.CustomWaveViewer.resources
-C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\obj\Debug\NAudioWinFormTest.CustomWaveViewer.resources
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\CustomComponents.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\NAudioWinFormTest\bin\Debug\CustomComponents.pdb

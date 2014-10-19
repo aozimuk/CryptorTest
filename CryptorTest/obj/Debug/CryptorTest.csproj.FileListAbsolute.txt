@@ -7,3 +7,10 @@ C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\CryptorTest\bin\Debug\DesCryp
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\CryptorTest\obj\Debug\CryptorTest.csprojResolveAssemblyReference.cache
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\CryptorTest\obj\Debug\CryptorTest.exe
 C:\Users\Valery.Gusev\Documents\GitHub\CryptorTest\CryptorTest\obj\Debug\CryptorTest.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\bin\Debug\CryptorTest.exe
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\bin\Debug\CryptorTest.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\bin\Debug\DesCryptor.dll
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\bin\Debug\DesCryptor.pdb
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\obj\Debug\CryptorTest.csprojResolveAssemblyReference.cache
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\obj\Debug\CryptorTest.exe
+C:\Users\valera\Documents\Visual Studio 2012\Projects\CryptorTest\CryptorTest\obj\Debug\CryptorTest.pdb
